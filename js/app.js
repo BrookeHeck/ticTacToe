@@ -36,7 +36,9 @@ class Player {
   }
 
   checkAscending(dimensionArr) {
-    return dimensionArr.includes(0) && dimensionArr.includes(1) && dimensionArr(2);
+    return (dimensionArr.includes(0)
+    && dimensionArr.includes(1)
+    && dimensionArr.includes(2));
   }
 
   checkEqual(dimensionArr) {
@@ -61,8 +63,8 @@ class Player {
 
 function createIntArray(str) {
   intArr = [];
-  for (let char in str) {
-    let number = Number(char);
+  for (let char of str) {
+    let number = parseInt(char);
     if(number === 0 || number === 1 || number === 2) {
       intArr.push(number);
     }
@@ -80,19 +82,20 @@ function playGame() {
   let playerTurn = 1;
 
   while(!hasWon) {
-    let move = prompt('Enter a game board coordinate');
+    let move = prompt(`Enter a game board coordinate player ${playerTurn}`);
     let coordinateArr = createIntArray(move);
+    console.log(coordinateArr);
     if(!coordinateArr) {
       alert('Not a valid coordinate');
-      break;
     } else {
       if (playerTurn === 1) {
         hasWon = playerX.addMove(coordinateArr);
         playerTurn = 2;
       } else {
         hasWon = playerY.addMove(coordinateArr);
-        playerTurn = 2;
+        playerTurn = 1;
       }
     }
   }
 }
+playGame();
