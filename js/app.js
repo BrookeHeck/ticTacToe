@@ -129,10 +129,10 @@ function handlePlayerMove(event) {
 function appendMarker(gridBox) {
   let img = document.createElement('img');
   if(playerTurn === 1) {
-    img.src = '../img/xImage.png';
+    img.src = 'img/xImage.png';
     img.alt = 'X Marker';
   } else {
-    img.src = '../img/oImage.png';
+    img.src = 'img/oImage.png';
     img.alt = 'O Marker';
   }
   gridBox.appendChild(img);
