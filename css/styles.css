@@ -1,7 +1,59 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #003049;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 10px 0;
+}
+
+header {
+  width: 960px;
+  margin: 0 auto;
+  background-color: white;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+header h2, main h2 {
+  width: fit-content;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  padding: 10px 0;
+}
+
+
+#gameBoard {
+  background-color: #e9ecef;
+  border-radius: 5px;
+  margin: 10px auto;
+  width: 960px;
+  display: grid;
+  grid-template-columns:  320px 320px 320px;
+  grid-template-rows: 50px 125px 125px 125px 125px 125px;
+}
+
+#gameBoard h3 {
+  font-size: 1.25rem;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
 .xDiv {
   display: inline;
-  border: solid red 1px;
   width: 100px;
+  background-color: white;
+  border: solid black 1px;
+  border-radius: 5px;
+}
+
+.xDiv:hover {
+  background-color: #003049;
+  cursor: pointer;
 }
 
 .xDiv img {
@@ -11,14 +63,27 @@
 
 .yDiv {
   display: flex;
-  border: solid green 1px;
   width: 300px;
   height: 100px;
 }
 
 .zDiv {
-  border: solid blue 1px;
   width: 300px;
   height: 300px;
-  margin: 30px auto;
+  margin: 0 auto;
 }
+
+.zDiv:nth-of-type(1) {
+  grid-column-start: 1;
+}
+
+.zDiv:nth-of-type(2) {
+  grid-column-start: 2;
+  grid-row-start: 3;
+}
+
+.zDiv:nth-of-type(3) {
+  grid-column-start: 3;
+  grid-row-start: 4;
+}
+

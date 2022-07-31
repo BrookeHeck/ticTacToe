@@ -79,7 +79,11 @@ function createIntArray(str) {
 
 // dynamically create board and event listeners
 function createBoard() {
-  boardDiv.addEventListener('click', handlePlayerMove);
+  for(let i = 0; i < 3; i++) {
+    let boardLevel = document.createElement('h3');
+    boardLevel.innerHTML = `z = ${i}`;
+    boardDiv.appendChild(boardLevel);
+  }
   for (let z = 0; z < 3; z++) {
     let zDiv = document.createElement('div');
     zDiv.setAttribute('class', 'zDiv');
@@ -92,7 +96,7 @@ function createBoard() {
         let xDiv = document.createElement('div');
         xDiv.setAttribute('class', 'xDiv');
         xDiv.innerHTML = `(${x}, ${y}, ${z})`;
-        // xDiv.hidden = 'hidden';
+        xDiv.addEventListener('click', handlePlayerMove);
         yDiv.appendChild(xDiv);
       }
     }
@@ -101,6 +105,7 @@ function createBoard() {
 
 function handlePlayerMove(event) {
   appendMarker(event.target);
+  let displayTurn = document.querySelector('#currentPlayer');
   let move = event.target.innerHTML;
   let coordinateArr = createIntArray(move);
   if (playerTurn === 1) {
@@ -110,10 +115,15 @@ function handlePlayerMove(event) {
   }
   if(hasWon) {
     boardDiv.innerHTML = '';
+    displayTurn.innerHTML = '';
     let winner = document.querySelector('#winnerAlert');
     winner.innerHTML = `Player ${playerTurn} Wins`;
+  } else {
+    playerTurn === 1 ? playerTurn = 2 : playerTurn = 1;
+    displayTurn.innerHTML = `Player ${playerTurn} Your Turn`;
   }
-  playerTurn === 1 ? playerTurn = 2 : playerTurn = 1;
+  
+  event.target.removeEventListener('click', handlePlayerMove);
 }
 
 function appendMarker(gridBox) {
