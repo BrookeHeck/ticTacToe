@@ -98,4 +98,31 @@ function playGame() {
     }
   }
 }
-playGame();
+// playGame();
+
+// dynamically create board and event listeners
+function createBoard() {
+  let boardDiv = document.querySelector('#gameBoard');
+  for (let z = 0; z < 3; z++) {
+    let zDiv = document.createElement('div');
+    zDiv.setAttribute('class', 'zDiv');
+    boardDiv.appendChild(zDiv);
+    for(let y = 0; y < 3; y++) {
+      let yDiv = document.createElement('div');
+      yDiv.setAttribute('class', 'yDiv');
+      zDiv.appendChild(yDiv);
+      for(let x = 0; x < 3; x++) {
+        let xDiv = document.createElement('div');
+        xDiv.setAttribute('class', 'xDiv');
+        xDiv.innerHTML = `(${x}, ${y}, ${z})`;
+        // xDiv.hidden = 'hidden';
+        yDiv.appendChild(xDiv);
+      }
+    }
+  }
+}
+createBoard();
+
+function handlePlayerMove(event) {
+
+}

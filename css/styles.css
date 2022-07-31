@@ -1,0 +1,19 @@
+.xDiv {
+  display: inline;
+  border: solid red 1px;
+  width: 100px;
+}
+
+.yDiv {
+  display: flex;
+  border: solid green 1px;
+  width: 300px;
+  height: 100px;
+}
+
+.zDiv {
+  border: solid blue 1px;
+  width: 300px;
+  height: 300px;
+  margin: 30px auto;
+}
