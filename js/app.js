@@ -1,5 +1,3 @@
-// global variables
-
 // Player class with constructor
 class Player {
   type;
@@ -29,9 +27,6 @@ class Player {
     let isWinner = ((this.checkAscending(this.xDimension) || this.checkEqual(this.xDimension))
     && (this.checkAscending(this.yDimension) || this.checkEqual(this.yDimension))
     && (this.checkAscending(this.zDimension) || this.checkEqual(this.zDimension)));
-    if (isWinner) {
-      alert(`Congrats Player ${this.type}! You Win!`);
-    }
     return isWinner;
   }
 
@@ -61,6 +56,13 @@ class Player {
   }
 }
 
+// global variables
+let playerX = new Player('x');
+let playerY = new Player('y');
+let playerTurn = 1;
+let hasWon = false;
+let boardDiv = document.querySelector('#gameBoard');
+
 function createIntArray(str) {
   intArr = [];
   for (let char of str) {
@@ -75,34 +77,9 @@ function createIntArray(str) {
   return 0;
 }
 
-function playGame() {
-  let hasWon = false;
-  let playerX = new Player('x');
-  let playerY = new Player('y');
-  let playerTurn = 1;
-
-  while(!hasWon) {
-    let move = prompt(`Enter a game board coordinate player ${playerTurn}`);
-    let coordinateArr = createIntArray(move);
-    console.log(coordinateArr);
-    if(!coordinateArr) {
-      alert('Not a valid coordinate');
-    } else {
-      if (playerTurn === 1) {
-        hasWon = playerX.addMove(coordinateArr);
-        playerTurn = 2;
-      } else {
-        hasWon = playerY.addMove(coordinateArr);
-        playerTurn = 1;
-      }
-    }
-  }
-}
-// playGame();
-
 // dynamically create board and event listeners
 function createBoard() {
-  let boardDiv = document.querySelector('#gameBoard');
+  boardDiv.addEventListener('click', handlePlayerMove);
   for (let z = 0; z < 3; z++) {
     let zDiv = document.createElement('div');
     zDiv.setAttribute('class', 'zDiv');
@@ -121,8 +98,34 @@ function createBoard() {
     }
   }
 }
-createBoard();
 
 function handlePlayerMove(event) {
-
+  appendMarker(event.target);
+  let move = event.target.innerHTML;
+  let coordinateArr = createIntArray(move);
+  if (playerTurn === 1) {
+    hasWon = playerX.addMove(coordinateArr);
+  } else {
+    hasWon = playerY.addMove(coordinateArr);
+  }
+  if(hasWon) {
+    boardDiv.innerHTML = '';
+    let winner = document.querySelector('#winnerAlert');
+    winner.innerHTML = `Player ${playerTurn} Wins`;
+  }
+  playerTurn === 1 ? playerTurn = 2 : playerTurn = 1;
 }
+
+function appendMarker(gridBox) {
+  let img = document.createElement('img');
+  if(playerTurn === 1) {
+    img.src = '../img/xImage.png';
+    img.alt = 'X Marker';
+  } else {
+    img.src = '../img/oImage.png';
+    img.alt = 'O Marker';
+  }
+  gridBox.appendChild(img);
+}
+
+createBoard();

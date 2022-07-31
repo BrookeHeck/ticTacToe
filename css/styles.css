@@ -4,6 +4,11 @@
   width: 100px;
 }
 
+.xDiv img {
+  width: 75px;
+  height: 75px;
+}
+
 .yDiv {
   display: flex;
   border: solid green 1px;
