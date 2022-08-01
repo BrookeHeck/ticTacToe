@@ -127,15 +127,13 @@ function handlePlayerMove(event) {
 }
 
 function appendMarker(gridBox) {
-  let img = document.createElement('img');
+  let marker = document.createElement('p');
   if(playerTurn === 1) {
-    img.src = 'img/xImage.png';
-    img.alt = 'X Marker';
+    marker.innerHTML = 'X';
   } else {
-    img.src = 'img/oImage.png';
-    img.alt = 'O Marker';
+    marker.innerHTML = 'O';
   }
-  gridBox.appendChild(img);
+  gridBox.appendChild(marker);
 }
 
 createBoard();
